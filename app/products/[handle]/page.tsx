@@ -23,7 +23,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
 
   return (
     <main className="product-page">
-      <Link className="back-link" href="/">
+      <Link className="back-link" href="/boutique">
         Retour au catalogue
       </Link>
       <section className="product-detail">
@@ -37,7 +37,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
               sizes="(max-width: 900px) 100vw, 50vw"
             />
           ) : (
-            <div className="image-placeholder">La Meduse</div>
+            <div className="image-placeholder">Trottipieces</div>
           )}
         </div>
         <div className="product-info">

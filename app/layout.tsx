@@ -1,11 +1,17 @@
 import type { Metadata } from "next";
-import Link from "next/link";
-import { ShoppingBag } from "lucide-react";
+import { RouteLoader } from "@/components/route-loader";
+import { SiteFooter } from "@/components/site-footer";
+import { SiteHeader } from "@/components/site-header";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "La Meduse",
-  description: "Storefront Medusa pour La Meduse"
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000"),
+  title: {
+    default: "Trottipieces - Pieces detachees pour trottinettes electriques",
+    template: "%s | Trottipieces"
+  },
+  description:
+    "Boutique francaise de pieces detachees pour trottinettes electriques: Xiaomi M365, Ninebot, Dualtron, Kaabo, Vsett et plus."
 };
 
 export default function RootLayout({
@@ -16,19 +22,10 @@ export default function RootLayout({
   return (
     <html lang="fr">
       <body>
-        <header className="site-header">
-          <Link className="brand" href="/">
-            La Meduse
-          </Link>
-          <nav className="main-nav" aria-label="Navigation principale">
-            <Link href="/#products">Produits</Link>
-            <Link className="cart-link" href="/cart" aria-label="Panier">
-              <ShoppingBag size={18} aria-hidden="true" />
-              Panier
-            </Link>
-          </nav>
-        </header>
+        <RouteLoader />
+        <SiteHeader />
         {children}
+        <SiteFooter />
       </body>
     </html>
   );

@@ -29,7 +29,13 @@ export function AddToCartButton({
 
   return (
     <div className="cart-action">
-      <button className="primary-button" type="button" onClick={handleClick} disabled={status === "loading"}>
+      <button
+        className="primary-button cart-add-button"
+        type="button"
+        onClick={handleClick}
+        disabled={status === "loading"}
+        data-status={status}
+      >
         <ShoppingBag size={18} aria-hidden="true" />
         {status === "loading" ? "Ajout..." : "Ajouter au panier"}
       </button>

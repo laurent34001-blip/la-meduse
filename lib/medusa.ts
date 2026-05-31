@@ -20,6 +20,21 @@ export type StoreProduct = {
   description?: string | null;
   thumbnail?: string | null;
   variants?: StoreVariant[];
+  collection?: {
+    id?: string;
+    title?: string;
+    handle?: string;
+  } | null;
+  categories?: {
+    id?: string;
+    name?: string;
+    handle?: string;
+  }[];
+  tags?: {
+    id?: string;
+    value?: string;
+  }[];
+  metadata?: Record<string, unknown> | null;
 };
 
 type ProductResponse = {
@@ -57,8 +72,8 @@ async function medusaFetch<T>(path: string, init?: RequestInit): Promise<T | nul
   }
 }
 
-export async function getProducts() {
-  const params = new URLSearchParams({ limit: "24" });
+export async function getProducts(limit = 100) {
+  const params = new URLSearchParams({ limit: String(limit) });
 
   if (regionId) {
     params.set("region_id", regionId);
