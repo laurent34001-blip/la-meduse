@@ -2,7 +2,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { AddToCartButton } from "@/components/add-to-cart-button";
-import { formatPrice, getProductByHandle, getProductPrice } from "@/lib/medusa";
+import { ApiNotice } from "@/components/api-notice";
+import { formatPrice, getProductByHandleResult, getProductPrice } from "@/lib/medusa";
 
 type ProductPageProps = {
   params: Promise<{
@@ -12,9 +13,23 @@ type ProductPageProps = {
 
 export default async function ProductPage({ params }: ProductPageProps) {
   const { handle } = await params;
-  const product = await getProductByHandle(handle);
+  const productResult = await getProductByHandleResult(handle);
+  const product = productResult.product;
 
   if (!product) {
+    if (productResult.unavailable) {
+      return (
+        <main className="product-page">
+          <Link className="back-link" href="/boutique">
+            Retour au catalogue
+          </Link>
+          <ApiNotice
+            title="Produit momentanément indisponible"
+            text="La fiche produit ne peut pas être chargée pour le moment. Vous pouvez revenir au catalogue ou réessayer dans quelques instants."
+          />
+        </main>
+      );
+    }
     notFound();
   }
 
@@ -37,7 +52,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
               sizes="(max-width: 900px) 100vw, 50vw"
             />
           ) : (
-            <div className="image-placeholder">Trottipieces</div>
+            <div className="image-placeholder">Trottipièces</div>
           )}
         </div>
         <div className="product-info">

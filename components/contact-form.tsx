@@ -29,7 +29,7 @@ export function ContactForm() {
           <input name="lastName" required autoComplete="family-name" />
         </label>
         <label>
-          Prenom
+          Prénom
           <input name="firstName" required autoComplete="given-name" />
         </label>
       </div>
@@ -39,7 +39,7 @@ export function ContactForm() {
           <input name="email" type="email" required autoComplete="email" />
         </label>
         <label>
-          Telephone
+          Téléphone
           <input name="phone" type="tel" autoComplete="tel" />
         </label>
       </div>
@@ -50,7 +50,7 @@ export function ContactForm() {
       <label>
         Type de client
         <select name="customerType" required defaultValue="">
-          <option value="" disabled>Selectionner</option>
+          <option value="" disabled>Sélectionner</option>
           <option>Particulier</option>
           <option>Professionnel</option>
         </select>
@@ -61,7 +61,7 @@ export function ContactForm() {
       </label>
       <label className="checkbox-line">
         <input name="consent" type="checkbox" required />
-        <span>J&apos;accepte que Trottipieces utilise ces informations pour repondre a ma demande.</span>
+        <span>J&apos;accepte que Trottipièces utilise ces informations pour répondre à ma demande.</span>
       </label>
       <button className="button button-primary" type="submit" disabled={state === "loading"}>
         <Send size={18} aria-hidden="true" />
@@ -69,7 +69,7 @@ export function ContactForm() {
       </button>
       {state === "success" ? (
         <p className="form-success" role="status">
-          Votre message est pret a etre transmis. TODO backend: connecter ce formulaire a Medusa, CRM ou email transactionnel.
+          Votre message est prêt à être transmis. TODO backend : connecter ce formulaire à Medusa, CRM ou e-mail transactionnel.
         </p>
       ) : null}
     </form>

@@ -1,16 +1,17 @@
 import type { Metadata } from "next";
 import { PackageSearch } from "lucide-react";
+import { ApiNotice } from "@/components/api-notice";
 import { FilterSidebar } from "@/components/filter-sidebar";
 import { MobileFilterDrawer } from "@/components/mobile-filter-drawer";
 import { getProductBrand, getProductPartType } from "@/components/product-card";
 import { ProductGrid } from "@/components/product-grid";
 import { ShopSortSelect } from "@/components/shop-sort-select";
-import { getProductPrice, getProducts, type StoreProduct } from "@/lib/medusa";
+import { getProductPrice, getProductsResult, type StoreProduct } from "@/lib/medusa";
 
 export const metadata: Metadata = {
-  title: "Boutique pieces trottinette electrique",
+  title: "Boutique pièces trottinette électrique",
   description:
-    "Grand catalogue de pieces detachees pour trottinettes electriques: batteries, pneus, freins, chargeurs, moteurs, pieces Xiaomi M365, Ninebot et Dualtron."
+    "Grand catalogue de pièces détachées pour trottinettes électriques : batteries, pneus, freins, chargeurs, moteurs, pièces Xiaomi M365, Ninebot et Dualtron."
 };
 
 type ShopPageProps = {
@@ -83,7 +84,8 @@ function hrefWithout(params: Record<string, string | string[] | undefined>, keyT
 
 export default async function ShopPage({ searchParams }: ShopPageProps) {
   const params = (await searchParams) ?? {};
-  const products = await getProducts(100);
+  const productsResult = await getProductsResult(100);
+  const products = productsResult.products;
   const maxPrice = Math.max(
     100,
     ...products.map((product) => getProductPrice(product)?.amount ?? 0)
@@ -96,9 +98,9 @@ export default async function ShopPage({ searchParams }: ShopPageProps) {
       <div className="shop-heading">
         <div>
           <p className="eyebrow">Boutique</p>
-          <h1>Pieces detachees pour trottinettes electriques</h1>
+          <h1>Pièces détachées pour trottinettes électriques</h1>
           <p>
-            Catalogue Medusa optimise pour les grandes volumetries, avec recherche,
+            Catalogue Medusa optimisé pour les grandes volumétries, avec recherche,
             filtres compatibles et grille compacte.
           </p>
         </div>
@@ -119,9 +121,11 @@ export default async function ShopPage({ searchParams }: ShopPageProps) {
               {key}: {first(value)}
             </a>
           ))}
-          <a href="/boutique">Reinitialiser</a>
+          <a href="/boutique">Réinitialiser</a>
         </div>
       ) : null}
+
+      {productsResult.unavailable ? <ApiNotice /> : null}
 
       <div className="shop-layout">
         <div className="desktop-filters">
@@ -132,8 +136,12 @@ export default async function ShopPage({ searchParams }: ShopPageProps) {
         ) : (
           <div className="empty-state">
             <PackageSearch size={34} aria-hidden="true" />
-            <h2>Aucune piece trouvee</h2>
-            <p>Essayez une autre marque, un autre modele ou reinitialisez les filtres.</p>
+            <h2>{productsResult.unavailable ? "Catalogue temporairement indisponible" : "Aucune pièce trouvée"}</h2>
+            <p>
+              {productsResult.unavailable
+                ? "Le service catalogue ne répond pas pour le moment. La navigation reste disponible."
+                : "Essayez une autre marque, un autre modèle ou réinitialisez les filtres."}
+            </p>
           </div>
         )}
       </div>

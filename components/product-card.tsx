@@ -45,12 +45,12 @@ export function ProductCard({ product }: ProductCardProps) {
             sizes="(max-width: 560px) 50vw, (max-width: 900px) 33vw, (max-width: 1280px) 25vw, 20vw"
           />
         ) : (
-          <div className="image-placeholder">Trottipieces</div>
+          <div className="image-placeholder">Trottipièces</div>
         )}
       </Link>
       <div className="product-card-body">
         <div>
-          {brand ? <p className="product-meta">Compatible {brand}</p> : <p className="product-meta">Piece trottinette</p>}
+          {brand ? <p className="product-meta">Compatible {brand}</p> : <p className="product-meta">Pièce trottinette</p>}
           <h3>
             <Link href={`/products/${product.handle}`}>{product.title}</Link>
           </h3>

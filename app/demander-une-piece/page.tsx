@@ -3,40 +3,40 @@ import { RequestPartForm } from "@/components/request-part-form";
 import { scooterBrands, scooterModels } from "@/data/catalog";
 
 export const metadata: Metadata = {
-  title: "Demander une piece",
+  title: "Demander une pièce",
   description:
-    "Demandez une piece de trottinette introuvable. Trottipieces aide a identifier les pieces compatibles Xiaomi M365, Ninebot, Dualtron, Kaabo, Vsett et plus."
+    "Demandez une pièce de trottinette introuvable. Trottipièces aide à identifier les pièces compatibles Xiaomi M365, Ninebot, Dualtron, Kaabo, Vsett et plus."
 };
 
 export default function RequestPartPage() {
   return (
     <main className="section form-page">
       <section className="page-hero compact">
-        <p className="eyebrow">Piece introuvable</p>
-        <h1>Demander une piece</h1>
+        <p className="eyebrow">Pièce introuvable</p>
+        <h1>Demander une pièce</h1>
         <p>
-          Vous ne trouvez pas la piece dont vous avez besoin ? Envoyez-nous les
+          Vous ne trouvez pas la pièce dont vous avez besoin ? Envoyez-nous les
           informations de votre trottinette et, si possible, des photos. Notre equipe
-          vous aide a identifier la bonne piece compatible.
+          vous aide à identifier la bonne pièce compatible.
         </p>
       </section>
 
       <section className="contact-layout">
         <RequestPartForm />
         <aside className="contact-card">
-          <h2>Pour une reponse precise</h2>
-          <p>Ajoutez la marque, le modele exact, l&apos;annee si connue et une photo de la piece ou de l&apos;etiquette produit.</p>
-          <p>Les demandes professionnelles peuvent etre rattachees a une ouverture de compte B2B.</p>
+          <h2>Pour une réponse précise</h2>
+          <p>Ajoutez la marque, le modèle exact, l&apos;année si connue et une photo de la pièce ou de l&apos;étiquette produit.</p>
+          <p>Les demandes professionnelles peuvent être rattachées à une ouverture de compte B2B.</p>
         </aside>
       </section>
 
       <section className="section no-x-padding">
         <div className="section-title">
-          <p className="eyebrow">Compatibilites</p>
-          <h2>De nombreuses marques et modeles suivis</h2>
+          <p className="eyebrow">Compatibilités</p>
+          <h2>De nombreuses marques et modèles suivis</h2>
           <p>
-            Cette liste sert a orienter la recherche, la reassurance et le SEO.
-            Elle ne cree pas automatiquement de pages produit.
+            Cette liste sert à orienter la recherche, la réassurance et le SEO.
+            Elle ne crée pas automatiquement de pages produit.
           </p>
         </div>
         <div className="compatibility-layout">
@@ -47,7 +47,7 @@ export default function RequestPartPage() {
             </div>
           </article>
           <article className="tag-panel">
-            <h3>Modeles frequents</h3>
+            <h3>Modèles fréquents</h3>
             <div className="tag-cloud">
               {scooterModels.map((model) => <span key={model}>{model}</span>)}
             </div>

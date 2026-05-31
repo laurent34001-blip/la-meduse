@@ -1,58 +1,59 @@
 export type LinkItem = {
   name: string;
   href: string;
+  logo?: string;
 };
 
 export const popularBrands: LinkItem[] = [
-  "Xiaomi",
-  "Ninebot",
-  "Dualtron",
-  "Speedway",
-  "Wispeed",
-  "Wegoboard",
-  "Kaabo",
-  "Vsett",
-  "Niu",
-  "E-Twow",
-  "Inokim",
-  "Zero",
-  "Kugoo",
-  "Minimotors",
-  "Teverun",
-  "UrbanGlide",
-  "Weebot",
-  "Cecotec",
-  "Navee",
-  "Aprilia",
-  "Ducati",
-  "Segway"
+  { name: "Xiaomi", logo: "MI" },
+  { name: "Ninebot", logo: "9" },
+  { name: "Dualtron", logo: "DT" },
+  { name: "Speedway", logo: "SW" },
+  { name: "Wispeed", logo: "WS" },
+  { name: "Wegoboard", logo: "WB" },
+  { name: "Kaabo", logo: "KB" },
+  { name: "Vsett", logo: "VS" },
+  { name: "Niu", logo: "NI" },
+  { name: "E-Twow", logo: "ET" },
+  { name: "Inokim", logo: "IK" },
+  { name: "Zero", logo: "Z" },
+  { name: "Kugoo", logo: "KG" },
+  { name: "Minimotors", logo: "MM" },
+  { name: "Teverun", logo: "TV" },
+  { name: "UrbanGlide", logo: "UG" },
+  { name: "Weebot", logo: "WE" },
+  { name: "Cecotec", logo: "CC" },
+  { name: "Navee", logo: "NV" },
+  { name: "Aprilia", logo: "AP" },
+  { name: "Ducati", logo: "DU" },
+  { name: "Segway", logo: "SG" }
 ].map((brand) => ({
-  name: brand,
-  href: `/boutique?marque=${encodeURIComponent(brand)}`
+  ...brand,
+  href: `/boutique?marque=${encodeURIComponent(brand.name)}`
 }));
 
 export const partCategories: LinkItem[] = [
   "Batterie",
   "Chargeur",
-  "Controleur",
+  "Contrôleur",
   "Moteur",
   "Roue",
   "Pneu",
-  "Chambre a air",
+  "Chambre à air",
   "Frein",
   "Disque de frein",
   "Plaquettes",
   "Garde-boue",
   "Potence",
   "Guidon",
-  "Ecran display",
-  "Accelerateur",
+  "Écran / display",
+  "Accélérateur",
   "Feu avant",
-  "Feu arriere",
-  "Cables",
+  "Feu arrière",
+  "Câbles",
   "Visserie",
   "Suspension",
-  "Bequille",
+  "Béquille",
   "Connecteurs"
 ].map((category) => ({
   name: category,

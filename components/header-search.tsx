@@ -8,6 +8,7 @@ import { formatPrice, getProductPrice, type StoreProduct } from "@/lib/medusa";
 
 type ProductResponse = {
   products?: StoreProduct[];
+  unavailable?: boolean;
 };
 
 function highlight(text: string, query: string) {
@@ -31,6 +32,7 @@ export function HeaderSearch() {
   const [query, setQuery] = useState("");
   const [products, setProducts] = useState<StoreProduct[]>([]);
   const [loading, setLoading] = useState(false);
+  const [unavailable, setUnavailable] = useState(false);
   const panelRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const trimmedQuery = query.trim();
@@ -57,6 +59,7 @@ export function HeaderSearch() {
   useEffect(() => {
     if (trimmedQuery.length < 3) {
       setProducts([]);
+      setUnavailable(false);
       setLoading(false);
       return;
     }
@@ -73,14 +76,17 @@ export function HeaderSearch() {
 
         if (!response.ok) {
           setProducts([]);
+          setUnavailable(true);
           return;
         }
 
         const data = (await response.json()) as ProductResponse;
         setProducts(data.products ?? []);
+        setUnavailable(Boolean(data.unavailable));
       } catch {
         if (!controller.signal.aborted) {
           setProducts([]);
+          setUnavailable(true);
         }
       } finally {
         window.clearTimeout(abortTimeout);
@@ -109,7 +115,7 @@ export function HeaderSearch() {
       <button
         className="nav-icon-link header-search-trigger"
         type="button"
-        aria-label="Rechercher une piece"
+        aria-label="Rechercher une pièce"
         aria-expanded={open}
         onClick={() => setOpen((value) => !value)}
       >
@@ -128,7 +134,7 @@ export function HeaderSearch() {
                 type="search"
                 value={query}
                 onChange={(event) => setQuery(event.target.value)}
-                placeholder="Ex: batterie Xiaomi, pneu Ninebot..."
+                placeholder="Ex : batterie Xiaomi, pneu Ninebot..."
                 aria-describedby="header-search-help"
               />
               {query ? (
@@ -140,10 +146,12 @@ export function HeaderSearch() {
           </label>
           <p id="header-search-help">
             {trimmedQuery.length < 3
-              ? "Saisissez au moins 3 caracteres pour voir les resultats."
+              ? "Saisissez au moins 3 caractères pour voir les résultats."
               : loading
                 ? "Recherche en cours..."
-                : `${products.length} resultat${products.length > 1 ? "s" : ""}`}
+                : unavailable
+                  ? "Recherche momentanément indisponible."
+                  : `${products.length} résultat${products.length > 1 ? "s" : ""}`}
           </p>
 
           {trimmedQuery.length >= 3 ? (
@@ -173,8 +181,10 @@ export function HeaderSearch() {
                     </Link>
                   );
                 })
-              ) : !loading ? (
-                <p className="header-search-empty">Aucun produit trouve.</p>
+              ) : !loading && !unavailable ? (
+                <p className="header-search-empty">Aucun produit trouvé.</p>
+              ) : unavailable ? (
+                <p className="header-search-empty">Le catalogue ne répond pas pour le moment.</p>
               ) : null}
             </div>
           ) : null}

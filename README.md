@@ -68,6 +68,8 @@ dans `.env.local`, qui est ignore par Git.
 - Pages compte, connexion, espace pro et page pro.
 - Pages legales: mentions legales, confidentialite, CGV.
 - Header responsive, barre d'actions mobile et footer de site.
+- Pages d'etat 404, erreur locale et erreur globale.
+- Logos Trottipieces, favicon et icon Apple integres.
 
 ## Routes principales
 
@@ -85,6 +87,7 @@ dans `.env.local`, qui est ignore par Git.
 /mentions-legales         Mentions legales
 /confidentialite          Politique de confidentialite
 /cgv                      Conditions generales de vente
+/not-found                Etat 404 gere par Next.js
 /api/medusa/[...path]     Proxy Store API Medusa
 /api/search-products      Recherche produit courte
 ```
@@ -97,6 +100,9 @@ app/
   boutique/page.tsx                Catalogue avec filtres
   products/[handle]/page.tsx       Fiche produit
   cart/page.tsx                    Panier client
+  error.tsx                        Etat d'erreur de route
+  global-error.tsx                 Etat d'erreur global
+  not-found.tsx                    Etat 404
   api/medusa/[...path]/route.ts    Proxy API vers Medusa
   api/search-products/route.ts     Recherche produit
 
@@ -110,6 +116,8 @@ components/
   add-to-cart-button.tsx           Bouton d'ajout panier
   contact-form.tsx                 Formulaire contact
   request-part-form.tsx            Formulaire demande de piece
+  api-notice.tsx                   Alerte catalogue indisponible
+  http-state.tsx                   UI 404/erreur
 
 data/
   catalog.ts                       Marques, categories et modeles
@@ -117,6 +125,9 @@ data/
 lib/
   medusa.ts                        Fetch catalogue cote serveur
   medusa-client.ts                 Appels panier cote navigateur
+
+public/
+  images/brand/                    Logos Trottipieces
 ```
 
 ## Integration Medusa
@@ -160,6 +171,8 @@ les blocages CORS, notamment dans Codespaces.
   d'authentification client/pro reste a connecter.
 - Les filtres boutique s'appuient sur les champs produit Medusa disponibles:
   titre, description, collection, categories, tags et metadata.
+- Le fichier `trottipieces_logo_variantes.zip` contient les variantes source des
+  logos. Les versions servies par l'application sont dans `public/images/brand/`.
 
 ## Scripts
 

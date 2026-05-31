@@ -4,7 +4,7 @@ import { LockKeyhole } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Connexion client",
-  description: "Connexion client Trottipieces pour acceder au compte et a l'espace professionnel."
+  description: "Connexion client Trottipièces pour accéder au compte et à l'espace professionnel."
 };
 
 export default function LoginPage() {
@@ -13,10 +13,10 @@ export default function LoginPage() {
       <section className="login-panel">
         <LockKeyhole size={30} aria-hidden="true" />
         <p className="eyebrow">Connexion requise</p>
-        <h1>Acces client</h1>
+        <h1>Accès client</h1>
         <p>
-          La connexion client Medusa n&apos;est pas encore branchee dans ce storefront.
-          Cette page protege l&apos;espace professionnel et attend l&apos;integration auth backend.
+          La connexion client Medusa n&apos;est pas encore branchée dans ce storefront.
+          Cette page protège l&apos;espace professionnel et attend l&apos;intégration auth backend.
         </p>
         <div className="cta-row">
           <Link className="button button-primary" href="/contact">Demander un compte pro</Link>

@@ -15,7 +15,7 @@ export async function GET(request: NextRequest) {
   const limit = request.nextUrl.searchParams.get("limit") ?? "6";
 
   if (query.length < 3) {
-    return NextResponse.json({ products: [] });
+    return NextResponse.json({ products: [], unavailable: false });
   }
 
   const params = new URLSearchParams({ q: query, limit });
@@ -34,16 +34,16 @@ export async function GET(request: NextRequest) {
     const response = await Promise.race([medusaRequest, timeout]);
 
     if (!response) {
-      return NextResponse.json({ products: [] });
+      return NextResponse.json({ products: [], unavailable: true });
     }
 
     if (!response.ok) {
-      return NextResponse.json({ products: [] });
+      return NextResponse.json({ products: [], unavailable: response.status >= 500 });
     }
 
     const data = (await response.json()) as ProductResponse;
-    return NextResponse.json({ products: data.products ?? [] });
+    return NextResponse.json({ products: data.products ?? [], unavailable: false });
   } catch {
-    return NextResponse.json({ products: [] });
+    return NextResponse.json({ products: [], unavailable: true });
   }
 }

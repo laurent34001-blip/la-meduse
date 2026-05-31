@@ -42,6 +42,16 @@ type ProductResponse = {
   product?: StoreProduct;
 };
 
+export type ProductsResult = {
+  products: StoreProduct[];
+  unavailable: boolean;
+};
+
+export type ProductResult = {
+  product: StoreProduct | null;
+  unavailable: boolean;
+};
+
 const backendUrl =
   process.env.NEXT_PUBLIC_MEDUSA_BACKEND_URL?.replace(/\/$/, "") ?? "http://localhost:9000";
 const publishableKey = process.env.NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY;
@@ -72,13 +82,49 @@ async function medusaFetch<T>(path: string, init?: RequestInit): Promise<T | nul
   }
 }
 
-export async function getProducts(limit = 100) {
+async function medusaFetchResult<T>(path: string, init?: RequestInit) {
+  try {
+    const response = await fetch(`${backendUrl}${path}`, {
+      ...init,
+      headers: {
+        ...storeHeaders(),
+        ...init?.headers
+      },
+      next: { revalidate: 60 }
+    });
+
+    if (!response.ok) {
+      return { data: null, unavailable: response.status >= 500 };
+    }
+
+    return { data: (await response.json()) as T, unavailable: false };
+  } catch {
+    return { data: null, unavailable: true };
+  }
+}
+
+function productParams(limit: number) {
   const params = new URLSearchParams({ limit: String(limit) });
 
   if (regionId) {
     params.set("region_id", regionId);
   }
 
+  return params;
+}
+
+export async function getProductsResult(limit = 100): Promise<ProductsResult> {
+  const params = productParams(limit);
+  const result = await medusaFetchResult<ProductResponse>(`/store/products?${params.toString()}`);
+
+  return {
+    products: result.data?.products ?? [],
+    unavailable: result.unavailable
+  };
+}
+
+export async function getProducts(limit = 100) {
+  const params = productParams(limit);
   const data = await medusaFetch<ProductResponse>(`/store/products?${params.toString()}`);
   return data?.products ?? [];
 }
@@ -98,6 +144,26 @@ export async function getProductByHandle(handle: string) {
   );
 
   return data?.products?.[0] ?? null;
+}
+
+export async function getProductByHandleResult(handle: string): Promise<ProductResult> {
+  const params = new URLSearchParams({
+    handle,
+    limit: "1"
+  });
+
+  if (regionId) {
+    params.set("region_id", regionId);
+  }
+
+  const result = await medusaFetchResult<ProductResponse>(
+    `/store/products?${params.toString()}`
+  );
+
+  return {
+    product: result.data?.products?.[0] ?? null,
+    unavailable: result.unavailable
+  };
 }
 
 export function getProductPrice(product: StoreProduct): MoneyAmount | null {

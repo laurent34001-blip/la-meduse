@@ -52,7 +52,7 @@ export default function CartPage() {
                   )}
                   <div>
                     <h2>{title}</h2>
-                    <p>Quantité: {item.quantity}</p>
+                    <p>Quantité : {item.quantity}</p>
                   </div>
                   <button
                     className="icon-button"

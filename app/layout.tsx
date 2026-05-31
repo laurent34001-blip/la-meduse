@@ -7,11 +7,11 @@ import "./globals.css";
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000"),
   title: {
-    default: "Trottipieces - Pieces detachees pour trottinettes electriques",
-    template: "%s | Trottipieces"
+    default: "Trottipièces - Pièces détachées pour trottinettes électriques",
+    template: "%s | Trottipièces"
   },
   description:
-    "Boutique francaise de pieces detachees pour trottinettes electriques: Xiaomi M365, Ninebot, Dualtron, Kaabo, Vsett et plus."
+    "Boutique française de pièces détachées pour trottinettes électriques : Xiaomi M365, Ninebot, Dualtron, Kaabo, Vsett et plus."
 };
 
 export default function RootLayout({

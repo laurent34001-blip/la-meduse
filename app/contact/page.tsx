@@ -5,7 +5,7 @@ import { ContactForm } from "@/components/contact-form";
 export const metadata: Metadata = {
   title: "Nous contacter",
   description:
-    "Contactez Trottipieces pour trouver une piece detachee de trottinette electrique, une compatibilite ou une demande professionnelle."
+    "Contactez Trottipièces pour trouver une pièce détachée de trottinette électrique, une compatibilité ou une demande professionnelle."
 };
 
 export default function ContactPage() {
@@ -15,21 +15,21 @@ export default function ContactPage() {
         <p className="eyebrow">Support client</p>
         <h1>Nous contacter</h1>
         <p>
-          Trottipieces accompagne les particuliers et les professionnels pour
-          identifier les bonnes pieces de trottinette electrique et securiser les compatibilites.
+          Trottipièces accompagne les particuliers et les professionnels pour
+          identifier les bonnes pièces de trottinette électrique et sécuriser les compatibilités.
         </p>
       </section>
       <section className="contact-layout">
         <ContactForm />
         <aside className="contact-card">
-          <h2>Coordonnees</h2>
+          <h2>Coordonnées</h2>
           <p><MapPin size={18} aria-hidden="true" /> Base en France</p>
           <p><Clock size={18} aria-hidden="true" /> Lun-Ven, 9h-18h</p>
-          <p><Mail size={18} aria-hidden="true" /> Support client francais</p>
-          <p><Phone size={18} aria-hidden="true" /> Reponse priorisee pour les demandes pro</p>
+          <p><Mail size={18} aria-hidden="true" /> Support client français</p>
+          <p><Phone size={18} aria-hidden="true" /> Réponse priorisée pour les demandes pro</p>
           <div className="notice">
-            Pour une piece introuvable, utilisez la page dediee avec marque,
-            modele et photos afin de faciliter l&apos;identification.
+            Pour une pièce introuvable, utilisez la page dédiée avec marque,
+            modèle et photos afin de faciliter l&apos;identification.
           </div>
         </aside>
       </section>

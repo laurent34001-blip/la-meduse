@@ -4,7 +4,7 @@ import { ProAccessBlock } from "@/components/pro-access-block";
 export const metadata: Metadata = {
   title: "Espace professionnel",
   description:
-    "Conditions professionnelles Trottipieces pour reparateurs, revendeurs, magasins et ateliers: tarifs HT apres connexion et ouverture de compte."
+    "Conditions professionnelles Trottipièces pour réparateurs, revendeurs, magasins et ateliers : tarifs HT après connexion et ouverture de compte."
 };
 
 export default function ProPage() {
@@ -12,10 +12,10 @@ export default function ProPage() {
     <main>
       <section className="section page-hero">
         <p className="eyebrow">B2B</p>
-        <h1>Espace professionnel Trottipieces</h1>
+        <h1>Espace professionnel Trottipièces</h1>
         <p>
-          Un parcours dedie aux reparateurs, revendeurs, ateliers, magasins et
-          societes qui ont besoin de pieces detachees fiables pour trottinettes electriques.
+          Un parcours dédié aux réparateurs, revendeurs, ateliers, magasins et
+          sociétés qui ont besoin de pièces détachées fiables pour trottinettes électriques.
         </p>
       </section>
       <ProAccessBlock />

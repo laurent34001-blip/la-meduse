@@ -124,20 +124,20 @@ export function FilterSidebar({ maxPrice = 1000 }: FilterSidebarProps) {
           </select>
         </label>
         <label>
-          Type de piece
+          Type de pièce
           <select
             name="piece"
             value={searchParams.get("piece") ?? ""}
             onChange={(event) => replaceParams({ piece: event.target.value || null })}
           >
-            <option value="">Toutes les pieces</option>
+            <option value="">Toutes les pièces</option>
             {partCategories.map((category) => (
               <option value={category.name} key={category.name}>{category.name}</option>
             ))}
           </select>
         </label>
         <label>
-          Modele de trottinette
+          Modèle de trottinette
           <input
             name="modele"
             placeholder="M365, G30, Dualtron..."
@@ -183,7 +183,7 @@ export function FilterSidebar({ maxPrice = 1000 }: FilterSidebarProps) {
           </select>
         </label>
         <label>
-          Compatibilite
+          Compatibilité
           <input
             name="compatibilite"
             placeholder="Xiaomi Pro 2..."
@@ -213,7 +213,7 @@ export function FilterSidebar({ maxPrice = 1000 }: FilterSidebarProps) {
         </label>
         <Link className="button button-secondary" href="/boutique">
           <RotateCcw size={16} aria-hidden="true" />
-          Reinitialiser
+          Réinitialiser
         </Link>
       </div>
     </aside>

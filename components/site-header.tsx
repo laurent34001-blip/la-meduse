@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { Menu, Search, ShoppingBag, UserRound, X } from "lucide-react";
 import { HeaderSearch } from "@/components/header-search";
@@ -8,7 +9,7 @@ import { HeaderSearch } from "@/components/header-search";
 const navigation = [
   { label: "Accueil", href: "/" },
   { label: "Boutique", href: "/boutique" },
-  { label: "Demander une piece", href: "/demander-une-piece" },
+  { label: "Demander une pièce", href: "/demander-une-piece" },
   { label: "Nous contacter", href: "/contact" },
   { label: "Espace pro", href: "/espace-pro" }
 ];
@@ -30,8 +31,23 @@ export function SiteHeader() {
   return (
     <header className={scrolled ? "site-header is-scrolled" : "site-header"}>
       <Link className="brand" href="/" onClick={() => setOpen(false)}>
-        <span className="brand-mark">T</span>
-        <span>Trottipieces</span>
+        <span className="brand-image-mark">
+          <Image
+            src="/images/brand/trottipieces-logo-embleme.png"
+            alt=""
+            width={40}
+            height={40}
+            priority
+          />
+        </span>
+        <Image
+          className="brand-wordmark"
+          src="/images/brand/trottipieces-logo-texte.png"
+          alt="Trottipièces"
+          width={190}
+          height={38}
+          priority
+        />
       </Link>
 
       <button
@@ -66,9 +82,9 @@ export function SiteHeader() {
           <Search size={20} aria-hidden="true" />
           <span>Boutique</span>
         </Link>
-        <Link href="/demander-une-piece" aria-label="Demander une piece">
+        <Link href="/demander-une-piece" aria-label="Demander une pièce">
           <span className="tab-plus">+</span>
-          <span>Piece</span>
+          <span>Pièce</span>
         </Link>
         <Link href="/cart" aria-label="Panier">
           <ShoppingBag size={20} aria-hidden="true" />
